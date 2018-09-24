@@ -1,0 +1,18 @@
+#! /bin/bash
+
+repo="/var/log"
+log="/var/log/update_script.log"
+
+if [ ! -e "$repo" ]; then
+	mkdir $repo
+fi
+if [ ! -f "$log" ]; then
+	touch $log
+fi
+sudo echo "update : " >> $log
+sudo apt-get update -y >> $log
+sudo echo "upgrade" >> $log
+sudo apt-get upgrade -y >> $log
+#sudo crontab -e
+#0 40 * * 0 /home/vagrant/02 
+#->  /var/spool/cron/crontabs/root

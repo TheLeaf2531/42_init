@@ -1,0 +1,15 @@
+#!/bin/bash
+
+HASH_FILE="/var/tmp/hash_crontab"
+FILE="/etc/crontab"
+CURRENT_HASH_VALUE="$(md5sum $FILE | awk {print $1})"
+
+if [ ! -f $HASH_FILE ]; then
+	echo $CURRENT_HASH_VALUE > $HASH_FILE
+else
+	if [ $CURRENT_HASH_VALUE != $(cat $HASH_FILE | awk {print $1}) ];then
+		echo "$FILE has been modified" | mail -s "$FILE modified notification" /var/mail/root
+	fi
+fi
+#sudo crontab -e
+#0 0 * * */home/vagrant/04
