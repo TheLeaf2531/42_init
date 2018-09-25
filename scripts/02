@@ -4,10 +4,10 @@ repo="/var/log"
 log="/var/log/update_script.log"
 
 if [ ! -e "$repo" ]; then
-	mkdir $repo
+	sudo mkdir $repo
 fi
 if [ ! -f "$log" ]; then
-	touch $log
+	sudo touch $log
 fi
 sudo echo "update : " >> $log
 sudo apt-get update -y >> $log
