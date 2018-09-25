@@ -1,1 +1,2 @@
-hostname
+#!/bin/bash
+hostname $1
